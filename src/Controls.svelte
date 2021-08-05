@@ -14,5 +14,10 @@
   main {
     display: flex;
     flex-direction: column;
+    margin: 1rem;
+  }
+
+  button {
+    width: 100%;
   }
 </style>
