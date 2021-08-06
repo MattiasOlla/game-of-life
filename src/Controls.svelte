@@ -2,11 +2,17 @@
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
+
+  export let running = false;
+
+  const toggleRunning = () => {
+    running = !running;
+  };
 </script>
 
 <main>
   <button on:click={() => dispatch('step')}>Step</button>
-  <button on:click={() => dispatch('run')}>Run</button>
+  <button on:click={toggleRunning}>{running ? 'Stop' : 'Run'}</button>
   <button on:click={() => dispatch('clear')}>Clear</button>
 </main>
 
