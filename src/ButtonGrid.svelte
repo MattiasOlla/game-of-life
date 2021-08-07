@@ -29,20 +29,21 @@
 <style>
   div {
     display: grid;
-    grid-template-columns: repeat(var(--size), 1fr);
+    grid-template-columns: repeat(var(--numCols), 1fr);
     gap: 2px;
     margin: 1rem;
-    width: min(70vw, 70vh);
-    height: min(70vw, 70vh);
     background-color: darkgray;
     padding: 0.5rem;
     border-radius: 2px;
   }
 
   button {
-    width: 100%;
-    height: 100%;
+    --squareSize: min(calc(65vw / var(--numCols)), calc(65vh / var(--numRows)));
+    width: var(--squareSize);
+    height: var(--squareSize);
     transition: all 0.1s ease;
+    margin: 0;
+    padding: 0;
   }
 
   .alive {
