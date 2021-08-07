@@ -5,15 +5,25 @@
   let buttonGrid: ButtonGrid;
 
   let running = false;
+  let animationSpeed = 300;
 
-  setInterval(() => running && buttonGrid.progressGeneration(), 300);
+  let interval: NodeJS.Timer;
+  $: {
+    clearInterval(interval);
+    interval = setInterval(() => running && buttonGrid.progressGeneration(), animationSpeed);
+  }
 </script>
 
 <main>
   <h1>Game of Life</h1>
   <div class="container">
     <ButtonGrid size={{ columns: 40, rows: 20 }} bind:this={buttonGrid} />
-    <Controls on:clear={buttonGrid.reset} on:step={buttonGrid.progressGeneration} bind:running />
+    <Controls
+      on:clear={buttonGrid.reset}
+      on:step={buttonGrid.progressGeneration}
+      bind:running
+      bind:animationSpeed
+    />
   </div>
 </main>
 
