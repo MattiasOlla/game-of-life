@@ -1,20 +1,21 @@
 <script lang="ts">
   import { getNextGeneration } from './game-of-life';
+  import type { GridSize } from './game-of-life';
 
-  export let size: number = 10;
+  export let size: GridSize;
 
-  let cellsAlive: boolean[] = Array(size ** 2).fill(false);
+  let cellsAlive: boolean[] = Array(size.columns * size.rows).fill(false);
 
   export const progressGeneration = () => {
-    cellsAlive = getNextGeneration(cellsAlive);
+    cellsAlive = getNextGeneration(cellsAlive, size);
   };
 
   export const reset = () => {
-    cellsAlive = Array(size ** 2).fill(false);
+    cellsAlive = Array(size.columns * size.rows).fill(false);
   };
 </script>
 
-<div style="--size: {size}">
+<div style="--numCols: {size.columns}; --numRows: {size.rows}">
   {#each cellsAlive as cell, cellNum (cellNum)}
     <button
       class:alive={cell}

@@ -12,7 +12,7 @@
 <main>
   <h1>Game of Life</h1>
   <div class="container">
-    <ButtonGrid size={20} bind:this={buttonGrid} />
+    <ButtonGrid size={{ columns: 40, rows: 20 }} bind:this={buttonGrid} />
     <Controls on:clear={buttonGrid.reset} on:step={buttonGrid.progressGeneration} bind:running />
   </div>
 </main>
