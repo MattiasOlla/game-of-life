@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import ReversedSlider from './ReversedSlider.svelte';
+  import SaveConfigs from './SaveConfigs.svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -25,6 +26,8 @@
   </div>
   <button on:click={toggleRunning}>{running ? 'Stop' : 'Run'}</button>
   <button on:click={onClear}>Clear</button>
+  <hr />
+  <SaveConfigs />
 </main>
 
 <style>
@@ -36,5 +39,12 @@
 
   button {
     width: 100%;
+  }
+
+  hr {
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: black;
   }
 </style>
