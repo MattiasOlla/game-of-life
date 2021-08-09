@@ -27,7 +27,7 @@
   <button on:click={toggleRunning}>{running ? 'Stop' : 'Run'}</button>
   <button on:click={onClear}>Clear</button>
   <hr />
-  <SaveConfigs />
+  <SaveConfigs on:change />
 </main>
 
 <style>

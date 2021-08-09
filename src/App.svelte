@@ -21,6 +21,7 @@
     <Controls
       on:clear={buttonGrid.reset}
       on:step={buttonGrid.progressGeneration}
+      on:change={(event) => buttonGrid.setState(event.detail.coords)}
       bind:running
       bind:animationSpeed
     />
