@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getNextGeneration } from './game-of-life';
+  import { coords2list, getNextGeneration } from './game-of-life';
   import type { GridSize } from './game-of-life';
 
   export let size: GridSize;
@@ -12,6 +12,11 @@
 
   export const reset = () => {
     cellsAlive = Array(size.columns * size.rows).fill(false);
+  };
+
+  export const setState = (coords: number[][]) => {
+    console.log(coords);
+    cellsAlive = coords2list(coords, size);
   };
 </script>
 
