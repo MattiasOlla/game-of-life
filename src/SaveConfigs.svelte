@@ -5,7 +5,7 @@
 
   const dispatch = createEventDispatcher();
 
-  let selectedConfig: Config | null = null;
+  let selectedConfig: Config;
   let storedConfigs = configs;
 
   onMount(() => {
