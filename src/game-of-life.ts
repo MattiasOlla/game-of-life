@@ -49,3 +49,17 @@ function chebyshevDistance(index1: number, index2: number, { columns }: GridSize
   const rowDiff = Math.abs((index1 % columns) - (index2 % columns));
   return Math.max(rowDiff, columnDiff);
 }
+
+export function list2coords(cellsAlive: boolean[], { columns }: GridSize): number[][] {
+  return cellsAlive
+    .map((alive, index) => (alive ? [Math.floor(index / columns), index % columns] : []))
+    .filter((arr) => arr.length);
+}
+
+export function coords2list(coords: number[][], { rows, columns }: GridSize): boolean[] {
+  const indices = new Set(coords.map(([i, j]) => j * columns + i));
+  console.log(indices);
+  return Array(rows * columns)
+    .fill(0)
+    .map((_, index) => indices.has(index));
+}
