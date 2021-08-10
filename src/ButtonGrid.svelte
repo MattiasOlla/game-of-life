@@ -14,10 +14,7 @@
     cellsAlive = Array(size.columns * size.rows).fill(false);
   };
 
-  export const setState = (coords: number[][]) => {
-    console.log(coords);
-    cellsAlive = coords2list(coords, size);
-  };
+  export const setState = (coords: number[][]) => (cellsAlive = coords2list(coords, size));
 </script>
 
 <div style="--numCols: {size.columns}; --numRows: {size.rows}">

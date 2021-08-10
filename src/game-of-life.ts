@@ -58,7 +58,6 @@ export function list2coords(cellsAlive: boolean[], { columns }: GridSize): numbe
 
 export function coords2list(coords: number[][], { rows, columns }: GridSize): boolean[] {
   const indices = new Set(coords.map(([i, j]) => j * columns + i));
-  console.log(indices);
   return Array(rows * columns)
     .fill(0)
     .map((_, index) => indices.has(index));
