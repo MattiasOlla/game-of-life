@@ -1,6 +1,7 @@
 <script lang="ts">
   import ButtonGrid from './ButtonGrid.svelte';
   import Controls from './Controls.svelte';
+  import SaveConfigs from './SaveConfigs.svelte';
 
   let buttonGrid: ButtonGrid;
 
@@ -18,13 +19,17 @@
   <h1>Game of Life</h1>
   <div class="container">
     <ButtonGrid size={{ columns: 40, rows: 20 }} bind:this={buttonGrid} />
-    <Controls
-      on:clear={buttonGrid.reset}
-      on:step={buttonGrid.progressGeneration}
-      on:change={(event) => buttonGrid.setState(event.detail.coords)}
-      bind:running
-      bind:animationSpeed
-    />
+    <div>
+      <Controls
+        on:clear={buttonGrid.reset}
+        on:step={buttonGrid.progressGeneration}
+        bind:running
+        bind:animationSpeed
+      />
+      <hr />
+      <SaveConfigs
+        on:change={(event) => buttonGrid.setState(event.detail.coords)}
+    </div>
   </div>
 </main>
 
@@ -53,5 +58,12 @@
     display: flex;
     margin: 0;
     padding: 0;
+  }
+
+  hr {
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: black;
   }
 </style>
