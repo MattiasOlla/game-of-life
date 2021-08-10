@@ -20,7 +20,7 @@
   $: localStorage.setItem('configs', JSON.stringify(storedConfigs));
 </script>
 
-<main>
+<div>
   <label for="stored_configs">Select a configuration:</label>
   <div class="row">
     <select id="stored_configs" bind:value={selectedConfig}>
@@ -44,10 +44,10 @@
       <button on:click={() => (showSaveInput = false)}>Cancel</button>
     </div>
   </div>
-</main>
+</div>
 
 <style>
-  main {
+  div {
     display: flex;
     flex-direction: column;
   }
@@ -62,8 +62,6 @@
   }
 
   .card {
-    display: flex;
-    flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 0.8rem;
     overflow: hidden;
