@@ -18,6 +18,17 @@
 
   // Save to localstorage every time the storedConfigs is updated
   $: localStorage.setItem('configs', JSON.stringify(storedConfigs));
+
+  export let getConfig: () => number[][];
+
+  const onSave = () =>
+    (storedConfigs = [
+      ...storedConfigs,
+      {
+        name: saveInputName,
+        coords: getConfig(),
+      },
+    ]);
 </script>
 
 <div>
@@ -33,14 +44,14 @@
 
   <button
     on:click={() => {
-      showSaveInput = true;
+      showSaveInput = !showSaveInput;
       saveInputName = '';
     }}>Save current configuration</button
   >
   <div class="card" class:hidden={!showSaveInput}>
     <input type="text" placeholder="Enter configuration name" bind:value={saveInputName} />
     <div class="row">
-      <button>Save</button>
+      <button on:click={onSave}>Save</button>
       <button on:click={() => (showSaveInput = false)}>Cancel</button>
     </div>
   </div>

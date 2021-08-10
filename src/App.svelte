@@ -29,6 +29,8 @@
       <hr />
       <SaveConfigs
         on:change={(event) => buttonGrid.setState(event.detail.coords)}
+        getConfig={() => buttonGrid.getState()}
+      />
     </div>
   </div>
 </main>
