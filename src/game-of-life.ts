@@ -52,7 +52,7 @@ function chebyshevDistance(index1: number, index2: number, { columns }: GridSize
 
 export function list2coords(cellsAlive: boolean[], { columns }: GridSize): number[][] {
   return cellsAlive
-    .map((alive, index) => (alive ? [Math.floor(index / columns), index % columns] : []))
+    .map((alive, index) => (alive ? [index % columns, Math.floor(index / columns)] : []))
     .filter((arr) => arr.length);
 }
 
