@@ -8,7 +8,6 @@
   let selectedConfig: Config;
   let storedConfigs = configs;
 
-  let showSaveInput = false;
   let saveInputName = '';
 
   onMount(() => {
@@ -16,19 +15,21 @@
     if (savedConfig) storedConfigs = JSON.parse(savedConfig);
   });
 
-  // Save to localstorage every time the storedConfigs is updated
-  $: localStorage.setItem('configs', JSON.stringify(storedConfigs));
-
   export let getConfig: () => number[][];
 
-  const onSave = () =>
-    (storedConfigs = [
-      ...storedConfigs,
-      {
-        name: saveInputName,
-        coords: getConfig(),
-      },
-    ]);
+  const saveConfig = () => {
+    const currentConfig = {
+      name: saveInputName,
+      coords: getConfig(),
+    };
+    storedConfigs = [...storedConfigs, currentConfig];
+    localStorage.setItem('configs', JSON.stringify(storedConfigs));
+    saveInputName = '';
+  };
+
+  let saveButtonDisabled: boolean;
+  $: saveButtonDisabled =
+    !saveInputName || storedConfigs.some((config) => config.name === saveInputName);
 </script>
 
 <div>
@@ -42,19 +43,13 @@
     <button on:click={() => dispatch('change', selectedConfig)}>Load config</button>
   </div>
 
-  <button
-    on:click={() => {
-      showSaveInput = !showSaveInput;
-      saveInputName = '';
-    }}>Save current configuration</button
-  >
-  <div class="card" class:hidden={!showSaveInput}>
-    <input type="text" placeholder="Enter configuration name" bind:value={saveInputName} />
-    <div class="row">
-      <button on:click={onSave}>Save</button>
-      <button on:click={() => (showSaveInput = false)}>Cancel</button>
+  <details>
+    <summary>Save current configuration</summary>
+    <div>
+      <input type="text" placeholder="Enter configuration name" bind:value={saveInputName} />
+      <button on:click={saveConfig} disabled={saveButtonDisabled}>Save</button>
     </div>
-  </div>
+  </details>
 </div>
 
 <style>
@@ -63,26 +58,17 @@
     flex-direction: column;
   }
 
-  .hidden {
-    display: none !important;
-  }
-
   .row {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
   }
-
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 0.8rem;
-    overflow: hidden;
-  }
-
-  .card > input {
-    width: 90%;
-  }
-
   label {
     text-align: left;
+    padding: 0.8rem;
+  }
+
+  summary {
+    margin-bottom: 10px;
   }
 </style>
